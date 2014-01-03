@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 
-public class RecipeCommentsFragment extends ListFragment {
+public class CommentsFragment extends ListFragment {
 	String[] numbers_text = new String[]{ "This is first comment", "Second comment", "Really big big big comment using complex engineering terms"};
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedBundleInstance){
@@ -19,4 +19,4 @@ public class RecipeCommentsFragment extends ListFragment {
 		 setListAdapter(adapter);
 		 return super.onCreateView(inflater, container, savedBundleInstance); 
 	}
-}
+} 

@@ -12,9 +12,17 @@
         -->
     </style>
 	<style name="Theme.CustomizedFullScreen" parent="android:Theme">
-    <item name="android:windowFullscreen">true</item>
-    <item name="android:windowNoTitle">true</item>
+    	<item name="android:windowFullscreen">true</item>
+    	<item name="android:windowNoTitle">true</item>
+    	<item name="android:listViewStyle">@style/ListView</item>
 </style>
+ <style name="ListView" parent="@android:style/Widget.ListView">
+    <item name="android:background">@android:color/transparent</item>
+    <item name="android:cacheColorHint">@android:color/transparent</item>
+    <item name="android:divider">#b9bc4d</item>
+    <item name="android:dividerHeight">2px</item>
+    <item name="android:fadingEdge">none</item>
+  </style>
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
