@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 
-public class RecipeCommentsFragment extends ListFragment {
-	String[] numbers_text = new String[]{ "This is first comment", "Second comment", "Really big big big comment using complex engineering terms"};
+public class RecipesFragment extends ListFragment { 
+	String[] numbers_text = new String[]{ "aloo", "sabzi", "gobi paratha"};
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedBundleInstance){
 		 ArrayAdapter<String> adapter = new ArrayAdapter<String>(inflater.getContext(), R.layout.recipe_comments_view,R.id.move_list_item,
@@ -19,4 +19,4 @@ public class RecipeCommentsFragment extends ListFragment {
 		 setListAdapter(adapter);
 		 return super.onCreateView(inflater, container, savedBundleInstance); 
 	}
-}
+} 
