@@ -6,23 +6,22 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import com.infome.dataobject.Categories;
-import com.infome.dataobject.QuestionObject;
+import com.infome.dataobject.Comment;
+import com.infome.dataobject.Event;
+import com.infome.dataobject.VideoObject;
 
 public class DatastoreImpl implements Datastore{
 
-//	private static final Logger log = Logger.getLogger(DatastoreImpl.class.getName());
 	private static PersistenceManager pm;
 	
 	@Override
-	public boolean put(QuestionObject question) {
+	public boolean put(String videoId) {
 		try {
 			pm = PMF.get().getPersistenceManager();
-			pm.makePersistent(question);
-			Categories category = new Categories(question.getCategory(), "Sample Category");
-			pm.makePersistent(category);
+			pm.makePersistent(new VideoObject(videoId));
 			return true;
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			return false;
 		} finally {
 			pm.close();
@@ -30,49 +29,62 @@ public class DatastoreImpl implements Datastore{
 	}
 
 	@Override
-	public List<QuestionObject> getByCategory(String categoryParam) {
+	public boolean addComment(Comment comment) {
+			
+		try {
+			pm = PMF.get().getPersistenceManager();
+			pm.makePersistent(comment);
+			return true; 
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return false;
+		} finally {
+			pm.close();
+		}
+	}
+	
+	@Override
+	public boolean addEvent(Event event) {
+			
+		try {
+			pm = PMF.get().getPersistenceManager();
+			pm.makePersistent(event);
+			return true; 
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return false;
+		} finally {
+			pm.close();
+		}
+	}
+	
+	@Override
+	public VideoObject getVideoObject(String videoId) {
 		pm = PMF.get().getPersistenceManager();
-		Query q = pm.newQuery(QuestionObject.class);
-		q.setFilter("category == categoryParam");
-		q.declareParameters("String categoryParam");
+		return pm.getObjectById(VideoObject.class, videoId);
+	}
+	
+	@Override
+	public List<Comment> getComments(Long commentIdParam) {
+		pm = PMF.get().getPersistenceManager();
+		Query q = pm.newQuery(Comment.class);
+		q.setFilter("commentId == commentIdParam");
+		q.declareParameters("Long commentIdParam");
 		@SuppressWarnings("unchecked")
-		List<QuestionObject> resultList = (List<QuestionObject>) q.execute(categoryParam);
+		List<Comment> resultList = (List<Comment>) q.execute(commentIdParam);
 		pm.close();
 		return resultList;
 	}
 	
-
 	@Override
-	public List<String> getCategories() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	@Override
-	public String update(String key, String response) {
-	    try {
-	    	pm = PMF.get().getPersistenceManager();
-			QuestionObject object = pm.getObjectById(QuestionObject.class, key);
-			if(object == null)
-				return "whaaaa";
-			if(response.equals("positive"))
-				object.setPositiveCount(object.getPositiveCount() + 1);
-			else
-				object.setNegativeCount(object.getNegativeCount() + 1);
-		} catch (Exception e) {
-			return e.getLocalizedMessage();
-		} finally {
-			pm.close();
-		}
-	    
-	    return "Updated";
-	}
-
-	@Override
-	public QuestionObject getQuestionById(Long qId) {
+	public List<Event> getEvents(Long eventIdParam) {
 		pm = PMF.get().getPersistenceManager();
-		QuestionObject returnVal = (QuestionObject) pm.getObjectById(QuestionObject.class, qId);
+		Query q = pm.newQuery(Event.class);
+		q.setFilter("eventId == eventIdParam");
+		q.declareParameters("Long eventIdParam");
+		@SuppressWarnings("unchecked")
+		List<Event> resultList = (List<Event>) q.execute(eventIdParam);
 		pm.close();
-		return returnVal;
+		return resultList;
 	}
 }
