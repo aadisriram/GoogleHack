@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	<servlet>
+		<servlet-name>InFoMe</servlet-name>
+		<servlet-class>com.infome.service.InFoMeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>InFoMe</servlet-name>
+		<url-pattern>/infome</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>MicroMonkey</servlet-name>
+		<servlet-class>com.appmantras.micromonkey.MicroMonkeyServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+	    <servlet-name>GetQuestions</servlet-name>
+	    <servlet-class>com.appmantras.micromonkey.GetQuestionsServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+	    <servlet-name>PutQuestion</servlet-name>
+	    <servlet-class>com.appmantras.micromonkey.PutQuestionServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+	    <servlet-name>UpdateQuestion</servlet-name>
+	    <servlet-class>com.appmantras.micromonkey.UpdateQuestionServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>MicroMonkey</servlet-name>
+		<url-pattern>/ping</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+	    <servlet-name>GetQuestions</servlet-name>
+	    <url-pattern>/getQuestions</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+	    <servlet-name>PutQuestion</servlet-name>
+	    <url-pattern>/putQuestion</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+	    <servlet-name>UpdateQuestion</servlet-name>
+	    <url-pattern>/updateQuestion</url-pattern>
+	</servlet-mapping>
+	
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+</web-app>
