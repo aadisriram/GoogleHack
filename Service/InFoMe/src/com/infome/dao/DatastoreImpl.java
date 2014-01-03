@@ -6,6 +6,7 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import com.google.appengine.api.search.SortExpression.SortDirection;
 import com.infome.dataobject.Comment;
 import com.infome.dataobject.Event;
 import com.infome.dataobject.VideoObject;

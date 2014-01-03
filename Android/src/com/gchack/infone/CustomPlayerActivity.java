@@ -40,7 +40,7 @@ YouTubePlayer.OnInitializedListener {
 			boolean wasrestored) {
 		ytp = player;
 		Toast.makeText(this, "Initialization  Success", Toast.LENGTH_LONG).show();
-		ytp.loadVideo("x_1N5xwuBYs");
+		ytp.loadVideo("6OdPsB2Wdwk");
 		// TODO Auto-generated method stub
 		
 	}
