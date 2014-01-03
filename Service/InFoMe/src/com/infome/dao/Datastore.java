@@ -2,17 +2,21 @@ package com.infome.dao;
 
 import java.util.List;
 
-import com.infome.dataobject.QuestionObject;
+import com.infome.dataobject.Comment;
+import com.infome.dataobject.Event;
+import com.infome.dataobject.VideoObject;
 
 public interface Datastore {
 	
-	public boolean put(QuestionObject entity);
+	public boolean put(String videoId);
 	
-	public QuestionObject getQuestionById(Long qId);
+	public boolean addComment(Comment comment);
 	
-	public String update(String entity, String response);
+	VideoObject getVideoObject(String videoId);
 	
-	public List<QuestionObject> getByCategory(String category);
+	List<Comment> getComments(Long commId);
 	
-	public List<String> getCategories();
+	List<Event> getEvents(Long eventIdParam);
+
+	boolean addEvent(Event event);
 }
