@@ -3,31 +3,28 @@ package com.gchack.infone;
 import com.gchack.datalayer.WebServiceFetcher;
 import com.gchack.dataobjects.VideoDetails;
 import com.gchack.dataobjects.YoutubeVideo;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Toast;
-
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.gchack.datalayer.WebServiceFetcher;
+import com.gchack.dataobjects.VideoDetails;
+import com.gchack.dataobjects.YoutubeVideo;
 
 public class MainActivity extends Activity {
 
@@ -41,17 +38,16 @@ public class MainActivity extends Activity {
 	String[] web = {
 
 	} ;
-	Integer[] imageId = {
+	String[] imageId = {
 
 	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		super.onCreate(savedInstanceState);	
 		setContentView(R.layout.activity_main);
-
+		ActionBar ab = getActionBar();
+		ab.setTitle("Recent Feed");
 		VideoListAdapter adapter = new
 				VideoListAdapter(MainActivity.this, web, imageId);
 		mainListView = (ListView)findViewById(R.id.home_list);
@@ -106,14 +102,14 @@ public class MainActivity extends Activity {
 			}
 
 			web = new String[videoNameList.size()];
+			imageId = new String[videoListOne.size()];
 			int i = 0;
 			for(String vid: videoNameList) {
-				web[i++] = vid;
+				web[i] = vid;
+				imageId[i] = videoListOne.get(i).getThumbnail();
+				System.out.println(imageId[i]);
+				i++;
 			}
-
-			imageId = new Integer[]{
-					R.drawable.ic_launcher,
-					R.drawable.ic_launcher};
 			VideoListAdapter adapter = new VideoListAdapter(MainActivity.this, web, imageId);
 			mainListView.setAdapter(adapter);
 			adapter.notifyDataSetChanged();
@@ -129,4 +125,6 @@ public class MainActivity extends Activity {
 			}
 		}
 	}
+	
 }
+

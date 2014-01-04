@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:fillViewport="true">
+
+
+        
+        <!-- Login Form -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/main_header_selector"
+            android:orientation="vertical"
+            android:padding="10dip" >
+             >
+
+            <!-- Logo Start -->
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+               
+                android:layout_weight="8.23"
+                android:src="@drawable/ifn_logo" />
+
+            <!-- Logo Ends -->
+
+
+            <!-- Email Label -->
+
+
+            <!-- Login button -->
+
+
+            <!-- Link to Registration Screen -->
+
+        </LinearLayout>
+
+        <!-- Login Form Ends -->
+</ScrollView>

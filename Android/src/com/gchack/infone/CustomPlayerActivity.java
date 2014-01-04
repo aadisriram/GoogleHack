@@ -22,16 +22,17 @@ public class CustomPlayerActivity extends Activity implements
 YouTubePlayer.OnInitializedListener {
 	private YouTubePlayerFragment ytpf;
 	private YouTubePlayer ytp;
-	ActionBar.Tab comments, recipes;
+	ActionBar.Tab comments, recipes, feedback;
 	private String videoId;
     Fragment commentsTab = new CommentsFragment();
     Fragment recipeTab = new RecipesFragment();
     
+
     public static String[] commentStats = new String[0];
     public static String[] eventStats = new String[0];
     public static ArrayAdapter<String> adapter;
     public static ArrayAdapter<String> recipeAdapter;
-    
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
