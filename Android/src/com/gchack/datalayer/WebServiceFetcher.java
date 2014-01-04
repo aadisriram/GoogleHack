@@ -22,11 +22,16 @@ import com.gchack.dataobjects.Comment;
 import com.gchack.dataobjects.Event;
 import com.gchack.dataobjects.VideoDetails;
 import com.gchack.dataobjects.YoutubeVideo;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 
 import android.util.Log;
 
 public class WebServiceFetcher {
-
+	
+	public List<YoutubeVideo> ytubeList = new ArrayList<YoutubeVideo>();
+	
 	public String getJsonResponse(String url) {
 		StringBuilder builder = new StringBuilder();
 		HttpClient client = new DefaultHttpClient();
@@ -82,8 +87,7 @@ public class WebServiceFetcher {
 		return videoDetails;
 	}
 	
-	public List<YoutubeVideo> getYoutubeList() throws Exception {
-		List<YoutubeVideo> ytubeList = new ArrayList<YoutubeVideo>();
+	public  String getYoutubeList() throws Exception {
 		String jsonString = getJsonResponse("https://gdata.youtube.com/feeds/users/qJkAAmi4QKCPCF62r_-BhQ/uploads?alt=json");
 		JSONObject jObj = new JSONObject(jsonString);
 		jObj = jObj.getJSONObject("feed");
@@ -98,7 +102,10 @@ public class WebServiceFetcher {
 			temp = tt.getJSONObject(0);
 			ytubeList.add(new YoutubeVideo(id, temp.getString("url"), title, length.getInt("seconds")));
 		}
-		return ytubeList;
+		
+		Gson gson = new GsonBuilder().create();
+		JsonArray myCustomArray = gson.toJsonTree(ytubeList).getAsJsonArray();
+		return myCustomArray.toString();
 	}
 }
 

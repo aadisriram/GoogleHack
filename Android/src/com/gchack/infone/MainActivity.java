@@ -70,8 +70,7 @@ public class MainActivity extends Activity {
 		protected String doInBackground(Void... arg0) {
 			WebServiceFetcher ws = new WebServiceFetcher();
 			try {
-				ws.getYoutubeList();
-				return "testing";
+				return ws.getYoutubeList();
 			} catch (Exception e) {
 				return e.getMessage();
 			}
