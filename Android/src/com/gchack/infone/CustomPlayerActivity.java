@@ -30,12 +30,14 @@ YouTubePlayer.OnInitializedListener {
     public static String[] commentStats = new String[0];
     public static String[] eventStats = new String[0];
     public static ArrayAdapter<String> adapter;
+    public static ArrayAdapter<String> recipeAdapter;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.custom_player_view);
 		commentStats = new String[0];
+		eventStats = new String[0];
 		videoId = getIntent().getStringExtra("videoId");
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayShowHomeEnabled(false);
@@ -88,7 +90,7 @@ YouTubePlayer.OnInitializedListener {
 					commentStats[i] = vd.comments.get(i).getComment();
 				}
 				eventStats = new String[vd.events.size()];
-				for(int i = 0; i < vd.comments.size(); i++) {
+				for(int i = 0; i < vd.events.size(); i++) {
 					eventStats[i] = vd.events.get(i).getEvent();
 				}
 				
