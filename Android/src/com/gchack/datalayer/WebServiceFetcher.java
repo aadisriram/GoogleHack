@@ -15,15 +15,16 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
+
+import android.util.Log;
 
 import com.gchack.dataobjects.Comment;
 import com.gchack.dataobjects.Event;
 import com.gchack.dataobjects.VideoDetails;
 import com.gchack.dataobjects.YoutubeVideo;
-
 import android.util.Log;
+
 
 public class WebServiceFetcher {
 	

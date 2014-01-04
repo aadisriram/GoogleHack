@@ -8,6 +8,7 @@
     android:paddingTop="@dimen/comment_list_margin"
     tools:context=".MainActivity" >
 
+
     <TextView
         android:id="@+id/home_page_item"
         android:layout_width="fill_parent"
@@ -16,9 +17,9 @@
         android:textColor="#e5e5e5"
         android:textSize="12sp" />
 
-    <ListView
+   <ListView
         android:id="@+id/home_list"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawSelectorOnTop="false"
         android:textColor="#FFFFFF" />
