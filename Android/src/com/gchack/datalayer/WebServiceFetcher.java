@@ -60,8 +60,7 @@ public class WebServiceFetcher {
 		return builder.toString();
 	}
 	
-	public VideoDetails getVideoDetails(String videoId) throws Exception {
-		String jsonString = getJsonResponse("http://1.ghfshack.appspot.com/getVideoDetails?videoId=abcd123ef");
+	public VideoDetails getVideoDetails(String jsonString) throws Exception {
 		JSONObject jObj = new JSONObject(jsonString);
 		JSONArray commentArray = jObj.getJSONArray("comments");
 		JSONArray eventArray = jObj.getJSONArray("events");
@@ -87,25 +86,14 @@ public class WebServiceFetcher {
 		return videoDetails;
 	}
 	
-	public  String getYoutubeList() throws Exception {
+	public String getYoutubeList() throws Exception {
 		String jsonString = getJsonResponse("https://gdata.youtube.com/feeds/users/qJkAAmi4QKCPCF62r_-BhQ/uploads?alt=json");
-		JSONObject jObj = new JSONObject(jsonString);
-		jObj = jObj.getJSONObject("feed");
-		JSONArray linkArray = jObj.getJSONArray("entry");
-		for(int i = 0; i < linkArray.length(); i++) {
-			JSONObject temp = linkArray.getJSONObject(i);
-			String id = temp.getString("id");
-			String title = temp.getString("title");
-			temp = temp.getJSONObject("media$group");
-			JSONObject length = temp.getJSONObject("yt$duration");
-			JSONArray tt = temp.getJSONArray("media$thumbnail");
-			temp = tt.getJSONObject(0);
-			ytubeList.add(new YoutubeVideo(id, temp.getString("url"), title, length.getInt("seconds")));
-		}
-		
-		Gson gson = new GsonBuilder().create();
-		JsonArray myCustomArray = gson.toJsonTree(ytubeList).getAsJsonArray();
-		return myCustomArray.toString();
+		return jsonString;
+	}
+	
+	public String getVideoData(String videoId) {
+		String jsonString = getJsonResponse("http://1.ghfshack.appspot.com/getVideoDetails?videoId=" + videoId);
+		return jsonString;
 	}
 }
 
