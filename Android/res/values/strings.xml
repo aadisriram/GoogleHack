@@ -4,5 +4,6 @@
     <string name="app_name">InFoNe</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="recent_videos">Recent Videos</string>
 
 </resources>
