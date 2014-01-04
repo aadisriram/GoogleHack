@@ -1,21 +1,15 @@
 package com.gchack.infone;
-import java.util.ArrayList;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.app.ActionBar;
-import android.app.ActionBar.TabListener;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.gchack.datalayer.WebServiceFetcher;
 import com.gchack.dataobjects.VideoDetails;
-import com.gchack.dataobjects.YoutubeVideo;
 import com.gchack.fragments.CommentsFragment;
 import com.gchack.fragments.RecipesFragment;
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -32,10 +26,16 @@ YouTubePlayer.OnInitializedListener {
 	private String videoId;
     Fragment commentsTab = new CommentsFragment();
     Fragment recipeTab = new RecipesFragment();
+    
+    public static String[] commentStats = new String[0];
+    public static String[] eventStats = new String[0];
+    public static ArrayAdapter<String> adapter;
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.custom_player_view);
+		commentStats = new String[0];
 		videoId = getIntent().getStringExtra("videoId");
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayShowHomeEnabled(false);
@@ -50,6 +50,8 @@ YouTubePlayer.OnInitializedListener {
         
         actionBar.addTab(comments);
         actionBar.addTab(recipes);
+        
+        new GetVideoDataTask().execute(videoId);
 	/*	Intent intent = new Intent(CustomPlayerActivity.this,CustomYouTubeActivity.class);
         startActivity(intent); */
         ytpf = (YouTubePlayerFragment) getFragmentManager()
@@ -79,10 +81,20 @@ YouTubePlayer.OnInitializedListener {
 
 		protected void onPostExecute(String result) {
 			try {
+				
 				VideoDetails vd = ws.getVideoDetails(result);
+				commentStats = new String[vd.comments.size()];
+				for(int i = 0; i < vd.comments.size(); i++) {
+					commentStats[i] = vd.comments.get(i).getComment();
+				}
+				eventStats = new String[vd.events.size()];
+				for(int i = 0; i < vd.comments.size(); i++) {
+					eventStats[i] = vd.events.get(i).getEvent();
+				}
+				
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Toast t = Toast.makeText(getApplicationContext(), "Problem pulling comments", Toast.LENGTH_LONG);
+				t.show();
 			}
 		}
 
