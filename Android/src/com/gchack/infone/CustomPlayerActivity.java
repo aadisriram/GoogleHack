@@ -1,5 +1,8 @@
 package com.gchack.infone;
 
+import java.util.SortedMap;
+import java.util.TreeMap;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
@@ -9,6 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.gchack.datalayer.WebServiceFetcher;
+import com.gchack.dataobjects.Comment;
+import com.gchack.dataobjects.Event;
 import com.gchack.dataobjects.VideoDetails;
 import com.gchack.fragments.CommentsFragment;
 import com.gchack.fragments.RecipesFragment;
@@ -27,11 +32,14 @@ YouTubePlayer.OnInitializedListener {
     Fragment commentsTab = new CommentsFragment();
     Fragment recipeTab = new RecipesFragment();
     
+    
 
     public static String[] commentStats = new String[0];
     public static String[] eventStats = new String[0];
     public static ArrayAdapter<String> adapter;
     public static ArrayAdapter<String> recipeAdapter;
+    public static SortedMap<Integer, Event> eventMap = new TreeMap<Integer, Event>();
+    public static SortedMap<Integer, Comment> commentMap = new TreeMap<Integer, Comment>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
@@ -88,11 +96,15 @@ YouTubePlayer.OnInitializedListener {
 				VideoDetails vd = ws.getVideoDetails(result);
 				commentStats = new String[vd.comments.size()];
 				for(int i = 0; i < vd.comments.size(); i++) {
-					commentStats[i] = vd.comments.get(i).getComment();
+					Comment comList = vd.comments.get(i);
+					commentMap.put(comList.getTime(), comList);
+					commentStats[i] = comList.getComment();
 				}
 				eventStats = new String[vd.events.size()];
 				for(int i = 0; i < vd.events.size(); i++) {
-					eventStats[i] = vd.events.get(i).getEvent();
+					Event eveList = vd.events.get(i);
+					eventMap.put(eveList.getTime(), eveList);
+					eventStats[i] = eveList.getEvent();
 				}
 				
 			} catch (Exception e) {
